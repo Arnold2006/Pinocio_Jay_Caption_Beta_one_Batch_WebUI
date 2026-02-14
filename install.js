@@ -1,6 +1,6 @@
 module.exports = {
   run: [
-    // Edit this step to customize the git repository to use
+    // Clone the repository
     {
       method: "shell.run",
       params: {
@@ -9,32 +9,28 @@ module.exports = {
         ]
       }
     },
-    // Edit this step with your custom install commands
+    // Install Python packages
     {
       method: "shell.run",
       params: {
-        venv: "env",                // Edit this to customize the venv folder path
-        path: "app",                // Edit this to customize the path to start the shell from
+        venv: "env",
+        path: "app",
         message: [
-          "uv pip install gradio devicetorch",
+          "uv pip install gradio",
           "uv pip install -r requirements.txt"
         ]
       }
     },
-    // Delete this step if your project does not use torch
+    // Install PyTorch (handled by torch.js)
     {
       method: "script.start",
       params: {
         uri: "torch.js",
         params: {
-          venv: "env",                // Edit this to customize the venv folder path
-          path: "app",                // Edit this to customize the path to start the shell from
-          // flashattention: true   // uncomment this line if your project requires flashattention
-          // xformers: true   // uncomment this line if your project requires xformers
-          // triton: true   // uncomment this line if your project requires triton
-          // sageattention: true   // uncomment this line if your project requires sageattention
+          venv: "env",
+          path: "app"
         }
       }
-    },
+    }
   ]
 }
